@@ -29,25 +29,28 @@ const InfoBlock = ({ subject, text }) => (
 );
 
 export default function AnnouncementScreen({ route }) {
+	const id = route.params.index;
 	return (
 		<View>
 			<View style={styles.containerHeader}>
-				<Text style={styles.header}>Announcement Details</Text>
+				<Text style={styles.header}>Announcement Details {id + 1}</Text>
 			</View>
 			<View style={styles.containerBody}>
 				<View style={{ marginVertical: 10 }}>
-					<Text style={styles.title}>{ANNOUNCEMENTS[0].title}</Text>
+					<Text style={styles.title}>{ANNOUNCEMENTS[id].title}</Text>
 				</View>
 				<View style={{ marginVertical: 10 }}>
-					<Text style={styles.text}>{ANNOUNCEMENTS[0].dateTime}</Text>
+					<Text style={styles.text}>
+						{ANNOUNCEMENTS[id].dateTime}
+					</Text>
 				</View>
 				<InfoBlock
 					subject="Details"
-					text={ANNOUNCEMENTS[0].info}
+					text={ANNOUNCEMENTS[id].info}
 				></InfoBlock>
 				<InfoBlock
 					subject="Packing List"
-					text={ANNOUNCEMENTS[0].packingList}
+					text={ANNOUNCEMENTS[id].packingList}
 				></InfoBlock>
 			</View>
 		</View>
