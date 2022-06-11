@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import LoginScreen from "./screens/LoginScreen";
-import HomeScreen from "./screens/HomeScreen";
+import HomeStack from "./screens/HomeScreen";
 import CalendarScreen from "./screens/CalendarScreen";
 
 // useful links
@@ -53,7 +53,7 @@ export default function App() {
 				<Tab.Screen
 					name="Home"
 					options={{ headerShown: false }}
-					component={HomeScreen}
+					component={HomeStack}
 				/>
 				<Tab.Screen
 					name="Events"

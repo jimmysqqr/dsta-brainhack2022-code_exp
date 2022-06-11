@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
+import AnnouncementScreen from "./AnnouncementScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 const EVENTS = [
   {
@@ -51,7 +54,8 @@ const EventsBlock = ({ title, date, time }) => (
   </View>
 );
 
-const AnnouncementsBlock = ({ info }) => (
+const AnnouncementsBlock = ({ navigation, info }) => (
+  
   <View
     style={{
       backgroundColor: "rgba(64, 121, 140, 0.15)",
@@ -75,8 +79,9 @@ const AnnouncementsBlock = ({ info }) => (
         alignSelf: "flex-end",
       }}
     >
-      <TouchableOpacity>
-        <Text style={{ color: "0D532F", fontWeight: "bold" }}>
+      <TouchableOpacity onPress={() => 
+        navigation.navigate("AnnouncementDetail")}>
+        <Text style={{ color: "#0D532F", fontWeight: "bold" }}>
           More details
         </Text>
       </TouchableOpacity>
@@ -84,13 +89,15 @@ const AnnouncementsBlock = ({ info }) => (
   </View>
 );
 
-export default function Home() {
+function Home() {
   function renderEventItem({ item }) {
     return <EventsBlock title={item.title} date={item.date} time={item.time} />;
   }
 
+  const navigation = useNavigation();
+
   function renderAnnouncementItem({ item }) {
-    return <AnnouncementsBlock info={item.info} />;
+    return <AnnouncementsBlock navigation={navigation} info={item.info} />;
   }
 
   return (
@@ -129,6 +136,17 @@ export default function Home() {
       </View>
     </View>
   );
+}
+
+const Stack = createStackNavigator();
+
+export default function HomeStack() {
+	return (
+		<Stack.Navigator>
+			<Stack.Screen name="AnnouncementHome" component={Home} options={{ headerShown: false }} />
+			<Stack.Screen name="AnnouncementDetail" component={AnnouncementScreen} options={{ headerShown: false }} />
+		</Stack.Navigator>
+	)
 }
 
 const styles = StyleSheet.create({
