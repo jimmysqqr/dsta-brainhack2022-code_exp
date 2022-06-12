@@ -135,24 +135,35 @@ function Home() {
         sections={[
           {
             title: "Upcoming Events",
+            icon: (
+              <FontAwesome
+                name="bell"
+                size={24}
+                color="black"
+                style={{ padding: 10 }}
+              />
+            ),
             data: EVENTS,
             renderItem: renderEventItem,
           },
           {
             title: "Announcements",
+            icon: (
+              <MaterialIcons
+                name="announcement"
+                size={32}
+                color="black"
+                style={{ padding: 10 }}
+              />
+            ),
             data: ANNOUNCEMENTS,
             renderItem: renderAnnouncementItem,
           },
         ]}
         style={styles.blockStyle}
-        renderSectionHeader={({ section: { title } }) => (
+        renderSectionHeader={({ section: { title, icon } }) => (
           <View style={styles.container}>
-            <FontAwesome
-              name="bell"
-              size={24}
-              color="black"
-              style={{ padding: 10 }}
-            />
+            {icon}
             <Text style={styles.textStyle}>{title}</Text>
           </View>
         )}
