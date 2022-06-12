@@ -25,9 +25,9 @@ const EVENTS = [
     time: "12pm to 1pm",
   },
   {
-    title: "Event 2",
-    date: "Fri, 15 July",
-    time: "12pm to 1pm",
+    title: "Event 3",
+    date: "Mon, 18 July",
+    time: "12pm to 3pm",
   },
 ];
 
