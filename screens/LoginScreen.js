@@ -17,7 +17,7 @@ export default function LoginScreen({ navigation }) {
       <Text
         style={{
           fontSize: 50,
-          marginBottom: 90,
+          marginBottom: 80,
           fontFamily: "'Georgia', serif",
         }}
       >
@@ -25,7 +25,7 @@ export default function LoginScreen({ navigation }) {
       </Text>
       <Text style={styles.label}>LOGIN</Text>
 
-      <Text style={{ fontSize: 18 }}>Username:</Text>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Username:</Text>
       <TextInput
         placeholder="Enter username"
         style={styles.textInput}
@@ -35,7 +35,7 @@ export default function LoginScreen({ navigation }) {
         }}
       />
 
-      <Text style={{ fontSize: 18 }}>Password:</Text>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Password:</Text>
       <TextInput
         placeholder="Enter password"
         style={styles.textInput}
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     margin: 5,
+    marginTop: 25,
   },
   buttonText: {
     fontWeight: "bold",
