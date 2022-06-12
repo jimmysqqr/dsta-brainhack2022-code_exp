@@ -30,11 +30,9 @@ export default function App() {
             } else if (route.name === "Events") {
               iconName = focused ? "ios-calendar" : "ios-calendar-outline";
             } else if (route.name === "Login") {
-              iconName = focused ? (
-                <FontAwesome name="user-circle" />
-              ) : (
-                <FontAwesome name="user-circle-o" />
-              );
+              iconName = focused
+                ? "person-circle-sharp"
+                : "person-circle-outline";
             }
 
             // You can return any component that you like here!
