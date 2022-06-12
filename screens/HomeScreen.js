@@ -21,9 +21,11 @@ const EVENTS = [
 
 const ANNOUNCEMENTS = [
   {
+    title: "Announcement Title 1",
     info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
+    title: "Announcement Title 2",
     info: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
 ];
@@ -54,7 +56,7 @@ const EventsBlock = ({ title, date, time }) => (
   </View>
 );
 
-const AnnouncementsBlock = ({ navigation, info, index }) => (
+const AnnouncementsBlock = ({ navigation, info, index, title }) => (
   <View
     style={{
       backgroundColor: "rgba(64, 121, 140, 0.15)",
@@ -68,7 +70,11 @@ const AnnouncementsBlock = ({ navigation, info, index }) => (
     }}
   >
     <View>
-      <Text style={{ fontSize: 20 }} numberOfLines={2}>
+      <Text style={{ fontSize: 20 }}>
+        {title}
+        {"\n"}
+      </Text>
+      <Text style={{ fontSize: 15 }} numberOfLines={2}>
         {info}
       </Text>
     </View>
@@ -105,6 +111,7 @@ function Home() {
       <AnnouncementsBlock
         navigation={navigation}
         info={item.info}
+        title={item.title}
         index={index}
       />
     );
@@ -172,15 +179,13 @@ const styles = StyleSheet.create({
     marginTop: 60,
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
   },
   containerAnnouncement: {
-    marginTop: 40,
+    marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 20,
     flexDirection: "row",
     alignItems: "center",
   },
