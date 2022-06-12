@@ -12,6 +12,7 @@ import { FlatList } from "react-native-gesture-handler";
 import AnnouncementScreen from "./AnnouncementScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { Foundation } from "@expo/vector-icons";
 
 const EVENTS = [
   {

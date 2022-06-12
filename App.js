@@ -26,7 +26,7 @@ export default function App() {
 
             //Set the icon based on which route it is (name of the tab)
             if (route.name === "Home") {
-              iconName = focused ? "ios-home" : "ios-home-outline";
+              iconName = focused ? "ios-megaphone" : "ios-megaphone-outline";
             } else if (route.name === "Events") {
               iconName = focused ? "ios-calendar" : "ios-calendar-outline";
             } else if (route.name === "Login") {
