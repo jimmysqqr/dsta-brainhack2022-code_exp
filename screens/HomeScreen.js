@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SectionList,
+  SafeAreaView,
+} from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
 import AnnouncementScreen from "./AnnouncementScreen";
@@ -10,6 +17,11 @@ const EVENTS = [
   {
     title: "IPPT Test",
     date: "Thu, 14 July",
+    time: "12pm to 1pm",
+  },
+  {
+    title: "Event 2",
+    date: "Fri, 15 July",
     time: "12pm to 1pm",
   },
   {
@@ -118,40 +130,35 @@ function Home() {
   }
 
   return (
-    <View>
-      <View style={styles.containerEvent}>
-        <FontAwesome
-          name="bell"
-          size={24}
-          color="black"
-          style={{ padding: 10 }}
-        />
-        <Text style={styles.eventStyle}>Upcoming Events</Text>
-      </View>
-      <View>
-        <FlatList
-          style={styles.blockStyle}
-          data={EVENTS}
-          renderItem={renderEventItem}
-        />
-      </View>
-      <View style={styles.containerAnnouncement}>
-        <MaterialIcons
-          name="announcement"
-          size={32}
-          color="black"
-          style={{ padding: 10 }}
-        />
-        <Text style={styles.eventStyle}>Camp Announcements</Text>
-      </View>
-      <View>
-        <FlatList
-          style={styles.blockStyle}
-          data={ANNOUNCEMENTS}
-          renderItem={renderAnnouncementItem}
-        />
-      </View>
-    </View>
+    <SafeAreaView>
+      <SectionList
+        sections={[
+          {
+            title: "Upcoming Events",
+            data: EVENTS,
+            renderItem: renderEventItem,
+          },
+          {
+            title: "Announcements",
+            data: ANNOUNCEMENTS,
+            renderItem: renderAnnouncementItem,
+          },
+        ]}
+        style={styles.blockStyle}
+        renderSectionHeader={({ section: { title } }) => (
+          <View style={styles.container}>
+            <FontAwesome
+              name="bell"
+              size={24}
+              color="black"
+              style={{ padding: 10 }}
+            />
+            <Text style={styles.textStyle}>{title}</Text>
+          </View>
+        )}
+        stickySectionHeadersEnabled={false}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -175,23 +182,15 @@ export default function HomeStack() {
 }
 
 const styles = StyleSheet.create({
-  containerEvent: {
-    marginTop: 60,
-    marginLeft: 20,
-    marginRight: 20,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  containerAnnouncement: {
+  container: {
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
     flexDirection: "row",
     alignItems: "center",
   },
-  eventStyle: {
+  textStyle: {
     fontWeight: "bold",
     fontSize: 28,
   },
-  blockStyle: {},
 });
