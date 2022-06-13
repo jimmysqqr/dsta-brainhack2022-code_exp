@@ -4,9 +4,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   TextInput,
 } from "react-native";
+import * as Font from "expo-font";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -16,16 +16,25 @@ export default function LoginScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text
         style={{
-          fontSize: 50,
+          fontSize: 40,
           marginBottom: 80,
-          fontFamily: "'Georgia', serif",
+          // fontFamily: "'Georgia', serif",
         }}
       >
         announcemeNS
       </Text>
       <Text style={styles.label}>LOGIN</Text>
 
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Username:</Text>
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: "bold",
+          alignSelf: "flex-start",
+          marginLeft: 45,
+        }}
+      >
+        Username:
+      </Text>
       <TextInput
         placeholder="Enter username"
         style={styles.textInput}
@@ -35,7 +44,16 @@ export default function LoginScreen({ navigation }) {
         }}
       />
 
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Password:</Text>
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: "bold",
+          alignSelf: "flex-start",
+          marginLeft: 45,
+        }}
+      >
+        Password:
+      </Text>
       <TextInput
         placeholder="Enter password"
         style={styles.textInput}
