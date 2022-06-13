@@ -18,7 +18,7 @@ export default function LoginScreen({ navigation }) {
         style={{
           fontSize: 40,
           marginBottom: 80,
-          // fontFamily: "'Georgia', serif",
+          fontFamily: "'Georgia', serif",
         }}
       >
         announcemeNS
@@ -29,8 +29,6 @@ export default function LoginScreen({ navigation }) {
         style={{
           fontSize: 18,
           fontWeight: "bold",
-          alignSelf: "flex-start",
-          marginLeft: 45,
         }}
       >
         Username:
@@ -48,8 +46,6 @@ export default function LoginScreen({ navigation }) {
         style={{
           fontSize: 18,
           fontWeight: "bold",
-          alignSelf: "flex-start",
-          marginLeft: 45,
         }}
       >
         Password:
@@ -62,7 +58,7 @@ export default function LoginScreen({ navigation }) {
           setPassword(newText);
         }}
       />
-      <View style={styles.buttons}>
+      <View style={styles.button}>
         <TouchableOpacity
           style={[styles.button, styles.submitButton]}
           onPress={() => navigation.navigate("Home")}
