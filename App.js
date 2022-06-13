@@ -7,7 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import LoginScreen from "./screens/LoginScreen";
 import HomeStack from "./screens/HomeScreen";
-import CalendarScreen from "./screens/CalendarScreen";
+import EventStack from "./screens/EventStack";
 
 // useful links
 // icons.expo.fyi
@@ -52,7 +52,7 @@ export default function App() {
         <Tab.Screen
           name="Events"
           options={{ headerShown: false }}
-          component={CalendarScreen}
+          component={EventStack}
         />
         <Tab.Screen
           name="Login"
