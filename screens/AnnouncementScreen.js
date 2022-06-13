@@ -4,7 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 const ANNOUNCEMENTS = [
 	{
-		title: "Announcement Title 1",
+		title: "Announcement Title 1 em ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn",
 		dateTime: "Thursday, 14 Jul 2022\n12pm",
 		info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 		packingList: "Sports attire, insect repellent",
@@ -32,9 +32,7 @@ export default function AnnouncementScreen({ route }) {
 	const id = route.params.index;
 	return (
 		<View>
-			<View style={styles.containerHeader}>
-				<Text style={styles.header}>Announcement Details {id + 1}</Text>
-			</View>
+			
 			<View style={styles.containerBody}>
 				<View style={{ marginVertical: 10 }}>
 					<Text style={styles.title}>{ANNOUNCEMENTS[id].title}</Text>

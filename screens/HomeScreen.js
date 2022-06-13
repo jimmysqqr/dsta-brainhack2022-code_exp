@@ -100,7 +100,7 @@ const AnnouncementsBlock = ({ navigation, info, index, title }) => (
     >
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("AnnouncementDetail", { index: index })
+          navigation.navigate("Announcement Details", { index: index })
         }
       >
         <Text style={{ color: "#0D532F", fontWeight: "bold" }}>
@@ -184,9 +184,9 @@ export default function HomeStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="AnnouncementDetail"
+        name="Announcement Details"
         component={AnnouncementScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );
