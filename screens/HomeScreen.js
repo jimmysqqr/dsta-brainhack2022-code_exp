@@ -12,6 +12,7 @@ import { FlatList } from "react-native-gesture-handler";
 import AnnouncementScreen from "./AnnouncementScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { Foundation } from "@expo/vector-icons";
 
 const EVENTS = [
   {
@@ -38,6 +39,14 @@ const ANNOUNCEMENTS = [
   },
   {
     title: "Announcement Title 2",
+    info: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    title: "Announcement Title 3",
+    info: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    title: "Announcement Title 4",
     info: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
 ];
@@ -133,19 +142,19 @@ function Home() {
     <SafeAreaView>
       <SectionList
         sections={[
-          {
-            title: "Upcoming Events",
-            icon: (
-              <FontAwesome
-                name="bell"
-                size={24}
-                color="black"
-                style={{ padding: 10 }}
-              />
-            ),
-            data: EVENTS,
-            renderItem: renderEventItem,
-          },
+          // {
+          //   title: "Upcoming Events",
+          //   icon: (
+          //     <FontAwesome
+          //       name="bell"
+          //       size={24}
+          //       color="black"
+          //       style={{ padding: 10 }}
+          //     />
+          //   ),
+          //   data: EVENTS,
+          //   renderItem: renderEventItem,
+          // },
           {
             title: "Announcements",
             icon: (
