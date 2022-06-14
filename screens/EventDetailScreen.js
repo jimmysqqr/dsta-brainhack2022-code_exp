@@ -14,29 +14,46 @@ const db = SQLite.openDatabase("events2.db");
 
 export default function EventDetailScreen({ navigation, route }) {
   const [event, setEvent] = useState([]);
+  const id = route.params.index;
+  console.log(id);
+
+  //create a state variable to keep track of the text input
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [bring, setBring] = useState("");
+  const [attire, setAttire] = useState("");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
+    let id = route.params.index;
     //get event id
     db.transaction((tx) => {
       tx.executeSql(
-        `SELECT * FROM events2 WHERE id=${route.params.index}`,
+        `SELECT * FROM events2;`,
         null, //pass a null argument object
         //Destructuring // take out rows frm the parameter first then take out _array and set it as events
-        (txObj, { rows: { _array } }) => setEvent(_array), //success callback function
+        (txObj, _array) => {
+          setEvent(_array);
+          console.log(_array);
+          console.log(route);
+          setTitle(_array.title);
+          setLocation(_array.location);
+          setDate(_array.date);
+          setStartTime(_array.startTime);
+          setEndTime(_array.endTime);
+          setBring(_array.bring);
+          setAttire(_array.attire);
+          setNotes(_array.notes);
+          console.log(event);
+        }, //success callback function
         (txObj, error) => console.log("Error ", error)
       );
     });
-  });
-
-  //create a state variable to keep track of the text input
-  const [title, setTitle] = useState(event.title);
-  const [location, setLocation] = useState(event.location);
-  const [date, setDate] = useState(event.date);
-  const [startTime, setStartTime] = useState(event.startTime);
-  const [endTime, setEndTime] = useState(event.endTime);
-  const [bring, setBring] = useState(event.bring);
-  const [attire, setAttire] = useState(event.attire);
-  const [notes, setNotes] = useState(event.notes);
+  }, []);
+  // console.log("title: ", event.title);
 
   // const isFirstRender = useRef(true);
   // useEffect(() => {
