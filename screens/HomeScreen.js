@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -7,12 +7,8 @@ import {
   SectionList,
   SafeAreaView,
 } from "react-native";
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { FlatList } from "react-native-gesture-handler";
-import AnnouncementScreen from "./AnnouncementScreen";
-import { createStackNavigator } from "@react-navigation/stack";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { Foundation } from "@expo/vector-icons";
 
 const EVENTS = [
   {
@@ -43,10 +39,6 @@ const ANNOUNCEMENTS = [
   },
   {
     title: "Announcement Title 3",
-    info: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    title: "Announcement Title 4",
     info: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
 ];
@@ -120,12 +112,12 @@ const AnnouncementsBlock = ({ navigation, info, index, title }) => (
   </View>
 );
 
-function Home() {
+export default function HomeScreen({ navigation, route }) {
   // function renderEventItem({ item }) {
   //   return <EventsBlock title={item.title} date={item.date} time={item.time} />;
   // }
 
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
 
   function renderAnnouncementItem({ item, index }) {
     return (
@@ -179,25 +171,6 @@ function Home() {
         stickySectionHeadersEnabled={false}
       />
     </SafeAreaView>
-  );
-}
-
-const Stack = createStackNavigator();
-
-export default function HomeStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="AnnouncementHome"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Announcement Details"
-        component={AnnouncementScreen}
-        options={{ headerShown: true }}
-      />
-    </Stack.Navigator>
   );
 }
 

@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import LoginScreen from "./screens/LoginScreen";
-import HomeStack from "./screens/HomeScreen";
+import HomeStack from "./screens/HomeStack";
 import EventStack from "./screens/EventStack";
 
 // useful links
