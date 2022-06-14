@@ -41,7 +41,7 @@ export default function LoginScreen({ navigation }) {
 			) {
 				setVisible(false);
 				userGroup = LOGIN_CREDENTIALS[i].userGroup;
-				navigation.navigate("Home", { userGroup });
+				navigation.navigate("AnnouncementHome", { userGroup });
 			}
 		}
 	}

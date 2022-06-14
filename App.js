@@ -17,58 +17,68 @@ import EventStack from "./screens/EventStack";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+	return (
+		<NavigationContainer>
+			<Tab.Navigator
+				screenOptions={({ route }) => ({
+					tabBarIcon: ({ focused, color, size }) => {
+						let iconName;
 
-            //Set the icon based on which route it is (name of the tab)
-            if (route.name === "Home") {
-              iconName = focused ? "ios-megaphone" : "ios-megaphone-outline";
-            } else if (route.name === "Events") {
-              iconName = focused ? "ios-calendar" : "ios-calendar-outline";
-            } else if (route.name === "Login") {
-              iconName = focused
-                ? "person-circle-sharp"
-                : "person-circle-outline";
-            }
+						//Set the icon based on which route it is (name of the tab)
+						if (route.name === "Home") {
+							iconName = focused
+								? "ios-megaphone"
+								: "ios-megaphone-outline";
+						} else if (route.name === "Events") {
+							iconName = focused
+								? "ios-calendar"
+								: "ios-calendar-outline";
+						} else if (route.name === "Login") {
+							iconName = focused
+								? "person-circle-sharp"
+								: "person-circle-outline";
+						}
 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: "#0D532F",
-          tabBarInactiveTintColor: "black",
-          tabBarActiveBackgroundColor: "#9EC1A3",
-          tabBarInactiveBackgroundColor: "#9EC1A3",
-        })}
-      >
-        <Tab.Screen
-          name="Home"
-          options={{ headerShown: false }}
-          component={HomeStack}
-        />
-        <Tab.Screen
-          name="Events"
-          options={{ headerShown: false }}
-          component={EventStack}
-        />
-        <Tab.Screen
-          name="Login"
-          options={{ headerShown: false }}
-          component={LoginScreen}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+						// You can return any component that you like here!
+						return (
+							<Ionicons
+								name={iconName}
+								size={size}
+								color={color}
+							/>
+						);
+					},
+					tabBarActiveTintColor: "#0D532F",
+					tabBarInactiveTintColor: "black",
+					tabBarActiveBackgroundColor: "#9EC1A3",
+					tabBarInactiveBackgroundColor: "#9EC1A3",
+				})}
+			>
+				<Tab.Screen
+					name="Login"
+					options={{ headerShown: false }}
+					component={LoginScreen}
+				/>
+				<Tab.Screen
+					name="Home"
+					options={{ headerShown: false }}
+					component={HomeStack}
+				/>
+				<Tab.Screen
+					name="Events"
+					options={{ headerShown: false }}
+					component={EventStack}
+				/>
+			</Tab.Navigator>
+		</NavigationContainer>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });
