@@ -57,6 +57,7 @@ export default function LoginScreen({ navigation }) {
         onChangeText={(newText) => {
           setPassword(newText);
         }}
+        secureTextEntry={true}
       />
       <View style={styles.button}>
         <TouchableOpacity

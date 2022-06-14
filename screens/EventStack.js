@@ -20,18 +20,23 @@ export default function EventStack() {
             fontSize: 30,
           },
           headerStyle: {
-            backgroundColor: "yellow",
+            backgroundColor: "#fff",
             borderBottomColor: "#ccc",
             borderBottomWidth: 1,
           },
+          headerTitleAlign: "center",
         }}
       />
-      <InnerStack.Screen 
-        name="EventDetails"
+      <InnerStack.Screen
+        name="Event Details"
         component={EventDetailScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, headerTitleAlign: "center" }}
       />
-      <InnerStack.Screen name="Add Event" component={AddEventScreen} />
+      <InnerStack.Screen
+        name="Add Event"
+        component={AddEventScreen}
+        options={{ headerTitleAlign: "center" }}
+      />
     </InnerStack.Navigator>
   );
 }
