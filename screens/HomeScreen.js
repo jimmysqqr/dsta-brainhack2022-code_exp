@@ -121,9 +121,9 @@ const AnnouncementsBlock = ({ navigation, info, index, title }) => (
 );
 
 function Home() {
-  function renderEventItem({ item }) {
-    return <EventsBlock title={item.title} date={item.date} time={item.time} />;
-  }
+  // function renderEventItem({ item }) {
+  //   return <EventsBlock title={item.title} date={item.date} time={item.time} />;
+  // }
 
   const navigation = useNavigation();
 
