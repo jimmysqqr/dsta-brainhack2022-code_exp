@@ -10,7 +10,7 @@ import { Entypo, Ionicons } from "@expo/vector-icons";
 import * as SQLite from "expo-sqlite";
 
 //save things to this database
-const db = SQLite.openDatabase("events.db"); //it will check for a database in the phone's file system. If it exist it will open it otherwise it will create it
+const db = SQLite.openDatabase("events2.db"); //it will check for a database in the phone's file system. If it exist it will open it otherwise it will create it
 
 export default function EventScreen({ navigation, route }) {
   //create a state variable for our events
@@ -20,7 +20,7 @@ export default function EventScreen({ navigation, route }) {
     //function of refreshing events by showing the all the present events aft it has been added or deleted
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM events",
+        "SELECT * FROM events2",
         null, //pass a null argument object
         //Destructuring // take out rows frm the parameter first then take out _array and set it as events
         (txObj, { rows: { _array } }) => setEvents(_array), //success callback function
@@ -35,12 +35,12 @@ export default function EventScreen({ navigation, route }) {
         tx.executeSql(
           //create table if it does not exist and call the table "events". The columns are id, title and done
           `CREATE TABLE IF NOT EXISTS 
-					events
+					events2
                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT,
-				Date TEXT,
-                startingTime TEXT,
-				endingTiime TEXT,
+				date TEXT,
+                startTime TEXT,
+				endTime TEXT,
 				location TEXT,
 				bring TEXT,
 				attire TEXT,
@@ -59,7 +59,7 @@ export default function EventScreen({ navigation, route }) {
   function deleteNote(id) {
     db.transaction(
       (tx) => {
-        tx.executeSql(`DELETE FROM events WHERE id = ${id}`);
+        tx.executeSql(`DELETE FROM events2 WHERE id = ${id}`);
       },
       null,
       refreshEvents
@@ -76,8 +76,17 @@ export default function EventScreen({ navigation, route }) {
       db.transaction(
         (tx) => {
           tx.executeSql(
-            "INSERT INTO events (title, date, startingTime, endingTime, location, bring, attire, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [newNote.title, newNote.startingTime]
+            "INSERT INTO events2 (title, date, startTime, endTime, location, bring, attire, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+              newNote.title,
+              newNote.date,
+              newNote.startTime,
+              newNote.endTime,
+              newNote.location,
+              newNote.bring,
+              newNote.attire,
+              newNote.notes,
+            ]
           );
         },
         null,
@@ -107,7 +116,8 @@ export default function EventScreen({ navigation, route }) {
   });
 
   //decides how the diff note items look like
-  function renderItem({ item }) {
+  function renderItem({ item, index }) {
+    //ADDED index
     return (
       <View
         style={{
@@ -121,12 +131,12 @@ export default function EventScreen({ navigation, route }) {
         }}
       >
         {/* press title to go to Event Details  */}
-        <TouchableOpacity onPress={() => navigation.navigate("Event Details")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Event Details", { index: index })}
+        >
           <Text style={{ fontSize: 16, textAlign: "left" }}>{item.title}</Text>
         </TouchableOpacity>
-        <Text style={{ fontSize: 16, textAlign: "left" }}>
-          {item.startingTime}
-        </Text>
+        <Text style={{ fontSize: 16, textAlign: "left" }}>{item.date}</Text>
         <TouchableOpacity onPress={() => deleteNote(item.id)}>
           <Ionicons name="trash" size={16} color="#944" />
         </TouchableOpacity>

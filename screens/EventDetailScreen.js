@@ -8,39 +8,66 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as SQLite from "expo-sqlite";
+import { useState, useEffect, useRef } from "react";
 
-const db = SQLite.openDatabase("events.db");
+const db = SQLite.openDatabase("events2.db");
 
-export default function EventDetailScreen({ route, navigation }) {
-  function refreshEvents() {
-    //function of refreshing events by showing the all the present events aft it has been added or deleted
+export default function EventDetailScreen({ navigation, route }) {
+  const [event, setEvent] = useState([]);
+
+  useEffect(() => {
+    //get event id
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM events",
+        `SELECT * FROM events2 WHERE id=${route.params.index}`,
         null, //pass a null argument object
         //Destructuring // take out rows frm the parameter first then take out _array and set it as events
-        (txObj, { rows: { _array } }) => setEvents(_array), //success callback function
+        (txObj, { rows: { _array } }) => setEvent(_array), //success callback function
         (txObj, error) => console.log("Error ", error)
       );
     });
-  }
+  });
 
-  function deleteEvent(id) {
-    db.transaction(
-      (tx) => {
-        tx.executeSql(`DELETE FROM events WHERE id = ${id}`);
-      },
-      null,
-      refreshEvents
-    );
-  }
+  //create a state variable to keep track of the text input
+  const [title, setTitle] = useState(event.title);
+  const [location, setLocation] = useState(event.location);
+  const [date, setDate] = useState(event.date);
+  const [startTime, setStartTime] = useState(event.startTime);
+  const [endTime, setEndTime] = useState(event.endTime);
+  const [bring, setBring] = useState(event.bring);
+  const [attire, setAttire] = useState(event.attire);
+  const [notes, setNotes] = useState(event.notes);
 
-  //   function addEvent() {
-  //     setEvent([...event, { title: title, startingTime: sTime }]);
-  //   }
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (!isFirstRender.current) {
+      console.log("\n'Event' state was updated");
+      console.log("\nUpdated event array:\n", event);
+      navigation.navigate("EventsHome", event); // event is JS Array
+    }
+  }, [event]);
 
-  function onPress(id) {
-    return deleteEvent(id), navigation.navigate("EventsHome"), refreshEvents();
+  // after the screen is rendered for the first time, we set isFirstRender flag to false
+  useEffect(() => {
+    console.log("\nScreen rendered");
+    isFirstRender.current = false; // toggle flag after first render/mounting
+  }, []);
+
+  //updateEvent button
+  function updateEvent() {
+    useEffect(() => {
+      //update sql table
+      db.transaction((tx) => {
+        tx.executeSql(
+          "UPDATE events2 SET title = title, location = location, date = date, startTime = startTime, endTime = endTime, bring = bring, attire = attire, notes = notes",
+          null, //pass a null argument object
+          //Destructuring // take out rows frm the parameter first then take out _array and set it as events
+          (txObj, { rows: { _array } }) => setEvent(_array), //success callback function
+          (txObj, error) => console.log("Error ", error)
+        );
+      });
+    });
+    //navigation.navigate("EventsHome");
   }
 
   return (
@@ -48,53 +75,88 @@ export default function EventDetailScreen({ route, navigation }) {
       <ScrollView>
         <View>
           <Text style={styles.titleLabel}>Title</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={title}
+            onChangeText={(newText) => setTitle(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>Date</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={date}
+            onChangeText={(newText) => setDate(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>Start Time</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={startTime}
+            onChangeText={(newText) => setStartTime(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>End Time</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={endTime}
+            onChangeText={(newText) => setEndTime(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>Location</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={location}
+            onChangeText={(newText) => setLocation(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>To Bring</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={bring}
+            onChangeText={(newText) => setBring(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>Attire</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={attire}
+            onChangeText={(newText) => setAttire(newText)}
+          ></TextInput>
         </View>
 
         <View>
           <Text style={styles.label}>Notes</Text>
-          <TextInput style={styles.textInput}></TextInput>
+          <TextInput
+            style={styles.textInput}
+            value={notes}
+            onChangeText={(newText) => setNotes(newText)}
+          ></TextInput>
         </View>
 
         <View style={styles.buttons}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={[styles.button, styles.deleteButton]}
             onPress={onPress}
           >
             <Text style={styles.buttonText}> Delete Event </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          <TouchableOpacity style={[styles.button, styles.saveButton]}>
+          <TouchableOpacity
+            style={[styles.button, styles.saveButton]}
+            onPress={updateEvent}
+          >
             <Text style={styles.buttonText}> Save </Text>
           </TouchableOpacity>
         </View>
