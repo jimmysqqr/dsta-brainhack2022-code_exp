@@ -68,34 +68,40 @@ export default function EventScreen({ navigation, route }) {
 
   // console.log("events:\n", events);
 
+  // useEffect(() => {
+  //   //code that will happen when route.params change
+  //   if (route?.params) {
+  //     //if route.params is not undefined
+  //     let newNote = route.params[route.params.length - 1]; // access the last element of the array
+  //     db.transaction(
+  //       (tx) => {
+  //         tx.executeSql(
+  //           "INSERT INTO events2 (title, date, startTime, endTime, location, bring, attire, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+  //           [
+  //             newNote.title,
+  //             newNote.date,
+  //             newNote.startTime,
+  //             newNote.endTime,
+  //             newNote.location,
+  //             newNote.bring,
+  //             newNote.attire,
+  //             newNote.notes,
+  //           ]
+  //         );
+  //       },
+  //       null,
+  //       refreshEvents
+  //     ); //the ? represent the sql parameter that we passed in using [route.params.text]
+  //   }
+  // }, [route?.params]);
+  // //if route.params doesnt exist then it will return undefined. So we need to check if it exists before we can use it.
+  // //if it does exit it will keep going down the list of parameteers
+
   useEffect(() => {
-    //code that will happen when route.params change
     if (route?.params) {
-      //if route.params is not undefined
-      let newNote = route.params[route.params.length - 1]; // access the last element of the array
-      db.transaction(
-        (tx) => {
-          tx.executeSql(
-            "INSERT INTO events2 (title, date, startTime, endTime, location, bring, attire, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-              newNote.title,
-              newNote.date,
-              newNote.startTime,
-              newNote.endTime,
-              newNote.location,
-              newNote.bring,
-              newNote.attire,
-              newNote.notes,
-            ]
-          );
-        },
-        null,
-        refreshEvents
-      ); //the ? represent the sql parameter that we passed in using [route.params.text]
+      refreshEvents();
     }
-  }, [route?.params]);
-  //if route.params doesnt exist then it will return undefined. So we need to check if it exists before we can use it.
-  //if it does exit it will keep going down the list of parameteers
+  }, [route.params]);
 
   //This adds the new note button in the header
   useEffect(() => {

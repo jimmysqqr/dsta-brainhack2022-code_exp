@@ -8,8 +8,11 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
+import * as SQLite from "expo-sqlite";
 
-export default function AddScreen({ navigation }) {
+const db = SQLite.openDatabase("events2.db");
+
+export default function AddScreen({ navigation, route }) {
   //create a state variable to keep track of the text input
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -39,6 +42,37 @@ export default function AddScreen({ navigation }) {
         notes: notes,
       },
     ]);
+
+    //let newNote = events[events.length - 1]; // access the last element of the array
+    //console.log(newNote, events);
+    let newNote = {
+      title: title,
+      location: location,
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+      bring: bring,
+      attire: attire,
+      notes: notes,
+    };
+    db.transaction((tx) => {
+      tx.executeSql(
+        "INSERT INTO events2 (title, date, startTime, endTime, location, bring, attire, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          newNote.title,
+          newNote.date,
+          newNote.startTime,
+          newNote.endTime,
+          newNote.location,
+          newNote.bring,
+          newNote.attire,
+          newNote.notes,
+        ]
+      );
+    }); //the ? represent the sql parameter that we passed in using [route.params.text]
+
+    //if route.params doesnt exist then it will return undefined. So we need to check if it exists before we can use it.
+    //if it does exit it will keep going down the list of parameteers
   }
 
   // https://www.codegrepper.com/code-examples/javascript/callback+after+setstate+hook

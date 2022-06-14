@@ -38,20 +38,20 @@ export default function EventDetailScreen({ navigation, route }) {
   const [attire, setAttire] = useState(event.attire);
   const [notes, setNotes] = useState(event.notes);
 
-  const isFirstRender = useRef(true);
-  useEffect(() => {
-    if (!isFirstRender.current) {
-      console.log("\n'Event' state was updated");
-      console.log("\nUpdated event array:\n", event);
-      navigation.navigate("EventsHome", event); // event is JS Array
-    }
-  }, [event]);
+  // const isFirstRender = useRef(true);
+  // useEffect(() => {
+  //   if (!isFirstRender.current) {
+  //     console.log("\n'Event' state was updated");
+  //     console.log("\nUpdated event array:\n", event);
+  //     navigation.navigate("EventsHome", event); // event is JS Array
+  //   }
+  // }, [event]);
 
-  // after the screen is rendered for the first time, we set isFirstRender flag to false
-  useEffect(() => {
-    console.log("\nScreen rendered");
-    isFirstRender.current = false; // toggle flag after first render/mounting
-  }, []);
+  // // after the screen is rendered for the first time, we set isFirstRender flag to false
+  // useEffect(() => {
+  //   console.log("\nScreen rendered");
+  //   isFirstRender.current = false; // toggle flag after first render/mounting
+  // }, []);
 
   //updateEvent button
   function updateEvent() {
@@ -67,7 +67,7 @@ export default function EventDetailScreen({ navigation, route }) {
         );
       });
     });
-    //navigation.navigate("EventsHome");
+    navigation.navigate("EventsHome");
   }
 
   return (
