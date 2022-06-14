@@ -20,7 +20,7 @@ export default function LoginScreen({ navigation }) {
 		if (userGroup === -1) {
 			return (
 				<View>
-					<Text>Login failed. Please try again.</Text>
+					<Text style={{ color: "red", marginBottom: 20, }}>Login failed. Please try again.</Text>
 				</View>
 			);
 		} else {
@@ -41,7 +41,10 @@ export default function LoginScreen({ navigation }) {
 			) {
 				setVisible(false);
 				userGroup = LOGIN_CREDENTIALS[i].userGroup;
-				navigation.navigate("AnnouncementHome", { userGroup });
+				navigation.navigate("Home", { 
+					screen: "AnnouncementHome",
+					params: {userGroup: userGroup},
+				});
 			}
 		}
 	}
@@ -53,13 +56,14 @@ export default function LoginScreen({ navigation }) {
 			<Text
 				style={{
 					fontSize: 40,
-					marginBottom: 80,
+					marginBottom: 40,
 					//fontFamily: "'Georgia', serif",
 				}}
 			>
 				announcemeNS
 			</Text>
-			<Text style={styles.label}>LOGIN</Text>
+      
+			{/*<Text style={styles.label}>LOGIN</Text>*/}
 
 			{visible && <LoginMsg />}
 
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
 	button: {
 		padding: 10,
 		margin: 5,
-		marginTop: 20,
+		marginTop: 15,
 	},
 	buttonText: {
 		fontWeight: "bold",
